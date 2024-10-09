@@ -184,38 +184,27 @@ namespace exercise.pizzashopapi.EndPoints
 
         public static async Task<IResult> CreateOrder(CreateOrderDTO createOrderDTO, IRepository repository)
         {
-           
-
             Order newOrder = new Order
             {
-               
-               
+                            
                 OrderId = createOrderDTO.OrderId,
                 CustomerId = createOrderDTO.CustomerId,
                 PizzaId = createOrderDTO.PizzaId
-
-
             };
             await repository.CreateOrder(newOrder);
             DTOOrders dTOOrder = new DTOOrders()
             {
-
-
               
                 OrderId = createOrderDTO.OrderId,
                 CustomerId = createOrderDTO.CustomerId,
                 PizzaId = createOrderDTO.PizzaId
 
-
             };
             return TypedResults.Created($"{newOrder.OrderId} {newOrder.PizzaId} {newOrder.CustomerId}", dTOOrder);
-
-
-
         }
 
       
-        public static  async Task<IResult> GetOrderStatus(IRepository repository,  int id )
+        public static  async Task<IResult> GetOrderStatus(IRepository repository, int id )
         {
             var order = await repository.GetOrderById(id);
            var timeElapsed = DateTime.Now - order.OrderTime;
